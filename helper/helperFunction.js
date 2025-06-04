@@ -5,8 +5,10 @@ import bcrypt, { compare } from "bcryptjs";
 import crypto from "crypto";
 import usermodel from "../model/usermodel.js";
 
-const secrectKey = crypto.randomBytes(48).toString("hex");
-
+const secrectKey =
+  "9f312b3aa1aecc2592a01bd835f96f2786dba42cd7a621cdba5da1330917415907a25e4ba0767c3585c5780aea5f9fa3";
+// crypto.randomBytes(48).toString("hex");
+// console.log("secrctkey", secrectKey);
 export function generateAccessToken(id, email, role) {
   const sessionid = createSession(id);
   const encoded_tokenPayload = {
@@ -129,11 +131,13 @@ export async function Admin() {
         lastname: "admin",
         email: email,
         role: "Admin",
-        mobile: "+91**********",
+        mobile: "+91 (***) **** ****",
         password: bcryptPassword("1234"),
+        address: "hyderabad telangana",
+        pincode: 500001,
       });
     } else {
-      console.log("admin already exist");
+      return console.log("admin already exist");
     }
   }
 }

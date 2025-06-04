@@ -5,9 +5,11 @@ import { Admin } from "./helper/helperFunction.js";
 import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
+import userRouter from "./routes/user/userRouter.js";
 
 const app = express();
 const port = config.PORT;
+
 
 app.set("trust proxy", true);
 morgan.token("remote-addr", function (req) {
@@ -46,6 +48,7 @@ app.use((err, req, res, next) => {
 });
 
 //routes
+app.use("/api/user", userRouter);
 
 dbConnect()
   .then(() => {

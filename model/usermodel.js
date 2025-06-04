@@ -12,6 +12,11 @@ const userSchema = new Schema(
     role: {
       type: String,
       default: "user",
+      enum: ["Admin", "user"],
+    },
+    tokenotp: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true, versionKey: false }
@@ -27,13 +32,13 @@ userSchema.pre("save", function (next) {
   const currentTime = currentLocalTimePlusOffset();
   this.createdAt = currentTime;
   this.updatedAt = currentTime;
-  next;
+  next();
 });
 
 userSchema.pre("findOneAndUpdate", function (next) {
   const currentTime = currentLocalTimePlusOffset();
   this.set({ updatedAt: currentTime });
-  next;
+  next();
 });
 
 const usermodel = model("user", userSchema);
